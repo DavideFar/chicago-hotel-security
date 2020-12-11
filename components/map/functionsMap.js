@@ -75,22 +75,33 @@ const _resetHotelsMarker = () => {
  */
 const _loadMap = () => {
 
-    MAP = new L.map('map_placeholder', { minZoom: 11, maxZoom: 16, attribution: 'Map data (c)OpenStreetMap contributors', fadeAnimation: false },).setView([41.85, -87.65], 11);
+    // MAP = new L.map('map_placeholder', { minZoom: 11, maxZoom: 16, attribution: 'Map data (c)OpenStreetMap contributors', fadeAnimation: false },).setView([41.85, -87.65], 11);
+    // let url = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    // let osm = new L.TileLayer(url);
+
+
+    // // function init() {
+    // //     var map = L.map('map', { fadeAnimation: false }).setView([25, -4], 3);
+    // //     L.tileLayer.grayscale('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // //         attribution: 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
+    // //         maxZoom: 14, minZoom: 2
+    // //     }).addTo(map);
+    // // }
+
+    // MAP.addLayer(osm);
+    // MAP.setMaxBounds(MAP.getBounds());
+    // MAP.on('click', _addInspectionArea);
+
+    MAP = new L.Map('map_placeholder');
     let url = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    let osm = new L.TileLayer(url);
-
-
-    // function init() {
-    //     var map = L.map('map', { fadeAnimation: false }).setView([25, -4], 3);
-    //     L.tileLayer.grayscale('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //         attribution: 'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
-    //         maxZoom: 14, minZoom: 2
-    //     }).addTo(map);
-    // }
-
+    let attrib = 'Map data (c)OpenStreetMap contributors';
+    let osm = new L.TileLayer(url, { minZoom: 11, maxZoom: 16, attribution: attrib });
+    MAP.setView(new L.LatLng(41.85, -87.65), 11);
     MAP.addLayer(osm);
     MAP.setMaxBounds(MAP.getBounds());
+
     MAP.on('click', _addInspectionArea);
+    console.log(MAP.getZoom());
 
     // Custom leaflet marker
 

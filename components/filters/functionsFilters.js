@@ -28,6 +28,7 @@ const _buildFiltersSection = () => {
 
   $('#filters_placeholder').html(filters);
   $('#filters_reset').hide();
+  $('#reset_inspect_section').hide();
 }
 
 // Returns the html for the autocomplete of the hotels
@@ -53,9 +54,9 @@ const _buildHotelStarsFilter = () => {
 
   html += '     <label for="filter_hotel_stars">Stars</label>';
   html += '     <select id="filter_hotel_stars" class="form-control" onChange="_updateFilters()">';
-  
+
   html += '         <option value="">All</option>';
-  
+
   for (let i = 1; i < 6; i++) {
 
     html += '       <option value="' + i + '">' + i + '</option>';
@@ -75,7 +76,7 @@ const _buildHotelPriceFilters = () => {
   html += '     <label for="filter_hotel_price" >Price</label>';
   html += '     <select id="filter_hotel_price" class="form-control"  onChange="_updateFilters()">';
 
-    html += '       <option value="">All</option>';
+  html += '       <option value="">All</option>';
 
   for (let i = 0; i < 4; i++) {
 
@@ -114,8 +115,11 @@ const _buildCrimesFilter = (crimes) => {
 
 const _buildInspectorMode = () => {
 
-  let inspectorButton = '<div class="col-12 form-group">';
+  let inspectorButton = '<div class="col-6 form-group">';
   inspectorButton += '    <button type="button" class="btn btn-dark" onClick="startInspectionMode()">Inspects</button>';
+  inspectorButton += '   </div>';
+  inspectorButton += '  <div id="reset_inspect_section" class="col-6 form-group">';
+  inspectorButton += '    <button type="button" class="btn btn-danger" onClick="resetInspectMode()">Cancel</button>';
   inspectorButton += '   </div>';
   inspectorButton += '   <div id="inspection_section" class="col-12 pb-3 form-group">';
   inspectorButton += '    <label for="inspection_range" style="background-color:lightgray;">Range (m)</label>'
@@ -137,7 +141,7 @@ const _updateFilters = () => {
   filtersState.hotelPrice = newHotelPrice;
   filtersState.crimesSelected = newCrimesTypologies;
 
-  if(newHotelStars != null || newHotelPrice != null || newCrimesTypologies.length > 1){
+  if (newHotelStars != null || newHotelPrice != null || newCrimesTypologies.length > 1) {
     $('#filters_reset').show(1000);
   } else {
     $('#filters_reset').hide();
@@ -147,7 +151,7 @@ const _updateFilters = () => {
 }
 
 const _buildButtonReset = () => {
-  
+
   let html = '<div id="filters_reset" class="col-12 form-group pb-3">';
   html += '     <button type="button" class ="btn" style="background-color:#f400a1" onClick="window.location.reload();">Reset Filters</button>';
   html += '   </div>';
